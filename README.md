@@ -1,7 +1,5 @@
 # M3IL：Multi-Modal Meta Imitation Learning
 
-The code presented here was used in: [Task-Embedded Control Networks for Few-Shot Imitation Learning](https://arxiv.org/abs/1810.03237).
-
 ### Running Paper Experiments
 
 ### Code Design
