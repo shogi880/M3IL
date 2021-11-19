@@ -1,6 +1,5 @@
-# M3IL：Multi-Modal Meta Imitation Learning
+# M3IL：Multi-Modal Meta Imitation Learning (under review)
 
-### Running Paper Experiments
 
 ### Code Design
 
