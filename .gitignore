@@ -2,10 +2,12 @@
 __pycache__/
 *.py[cod]
 *$py.class
-
+log_result/
+log*
+nohup.out
 # C extensions
 *.so
-
+.*
 # Distribution / packaging
 .Python
 build/

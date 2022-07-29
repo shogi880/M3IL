@@ -21,9 +21,8 @@ consumers = [a, b, c, d, e]
 p = Pipeline(consumers)
 ```
 
-This allows the TecNet to be built in a modular way. For example, if one
-wanted to do use a prototypical loss rather than a margin loss, then one would
-only need to swap out one of these consumers. 
-
-```
+```bash
+0. prepare the xml asserts of mujoco.
+1. run generator_instructions.py using bert-as-service
+2. bash mill.sh 0.0000001 1 (lambda_embedding rate=1e-7, seed=1)
 ```
