@@ -1,6 +1,6 @@
 CUDA_VISIBLE_DEVICES=$2 OMP_NUM_THREADS=4 python3 main_il.py \
 --random_seed=$1 \
---experiment_name=mill_random_instruction \
+--experiment_name=mill_30types \
 --task_id=False \
 --lr=0.0005 \
 --loss_type=reparam_loss \
@@ -13,4 +13,4 @@ CUDA_VISIBLE_DEVICES=$2 OMP_NUM_THREADS=4 python3 main_il.py \
 --no_mujoco=False \
 --embedding_type=both_embedding  \
 --sentence_type=both \
---sentence=15types \
+--sentence=30types \

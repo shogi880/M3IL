@@ -54,22 +54,21 @@ class Dataset(object):
                     'states': data['states'][e_idx]
                 }
                 if 'demo_selection' in data:
+                    # example['demo_selection'] = data['demo_selection'].replace('/root/code/rllab/vendor/mujoco_models', '/root/workspace/gym/gym/envs/mujoco/assets/sim_push_xmls')
                     example['demo_selection'] = data['demo_selection']
                     npy_name = data["demo_selection"].split('/')[-1].split('.')[0]
-                    if self.sentence == 'word':
-                        # print('Using 768_push_the_N_to_the_red_area language instrcution...')
-                        language_npy = f'/root/share/TecNets/datasets/768_word_instruction/{npy_name}.npy'
-                    elif self.sentence == '15types':
-                        language_npy = f'/root/share/TecNets/datasets/768_15_types_instruction/{npy_name}.npy'
+                    if self.sentence == '15types':
+                        language_npy = f'/root/share/768_15_types_instruction/{npy_name}.npy'
                     elif self.sentence == '30types':
-                        language_npy = f'/root/share/TecNets/datasets/768_30_types_instruction/{npy_name}.npy'
-                    else:
-                        language_npy = f'/root/share/TecNets/datasets/768_push_the_N_to_the_red_area/{npy_name}.npy'
-                        
+                        language_npy = f'/root/share/768_30_types_instruction/{npy_name}.npy'
+                    elif self.sentence == 'word':
+                        language_npy = f'/root/share/768_word_instruction/{npy_name}.npy'
+                    elif self.sentence == 'sentence':  # for petnet.sh
+                        language_npy = f'/root/share/768_15_types_instruction/{npy_name}.npy'
                     # example['language'] = [np.load(language_npy), np.load(id_npy) / 1102.0]
                     language = np.load(language_npy)
                     if self.task_id:
-                        id_npy = f'/root/share/TecNets/datasets/768_push_the_N_to_the_red_area/id_{npy_name}.npy'
+                        id_npy = f'/root/share/768_push_the_N_to_the_red_area/id_{npy_name}.npy'
                         # language = np.full_like(language, np.load(id_npy) / 1102.)
                         language = np.full_like(language, np.load(id_npy) / 1.)
                     example['language'] = language

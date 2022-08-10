@@ -8,7 +8,7 @@ CUDA_VISIBLE_DEVICES=-1 OMP_NUM_THREADS=1 python3 main_il.py \
 --datasetdir='../../datasets' --logdir='./log_eval' \
 --eval=True \
 --embedding_type=both_embedding \
---sentence_type=both \
+--sentence_type=image \
 --sentence=15types \
 --eval_trainenv=True --no_mujoco=False \
 --eval_only=True --load=True --checkpoint_dir="./log_1" --checkpoint_iter=-1 \

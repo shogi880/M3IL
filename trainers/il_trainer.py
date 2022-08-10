@@ -58,9 +58,9 @@ class ILTrainer(object):
         if not eval_only:
             resume_itr = self.pipeline.load()
             print('Setup Complete. Starting training...')
-        
+
             for itr in range(resume_itr, self.iterations + 1):
-                
+
                 # skip training if evaluation only
 
                 fetches = [train_op]
@@ -80,7 +80,7 @@ class ILTrainer(object):
 
                 if itr % SUMMARY_INTERVAL == 0 or itr < 200:
                     print('Summary iter', itr, '| Loss:',
-                        result[1], '| Time:', time.time() - start)
+                          result[1], '| Time:', time.time() - start)
                     if self.summary_writer is not None:
                         self.summary_writer.add_summary(sess, result[-1], itr)
 
@@ -94,24 +94,30 @@ class ILTrainer(object):
 
                 if itr % EVAL_INTERVAL == 0 and itr > 1 and self.eval is not None:
                     acc, new_acc = self.eval.evaluate(itr)
-                    print('Evaluation on old test setat iter %d. Success rate: %.2f (test)' % (itr, acc))
-                    print('Evaluation on new test set at iter %d. Success rate: %.2f (test)' % (itr, new_acc))
+                    print(
+                        'Evaluation on old test setat iter %d. Success rate: %.2f (test)' % (itr, acc))
+                    print('Evaluation on new test set at iter %d. Success rate: %.2f (test)' % (
+                        itr, new_acc))
                     if self.summary_writer is not None:
                         eval_success = sess.run(
                             self.eval_summary, {self.eval_summary_in: acc})
-                        self.summary_writer.add_summary(sess, eval_success, itr)
-                    
+                        self.summary_writer.add_summary(
+                            sess, eval_success, itr)
+
                         new_eval_success = sess.run(
                             self.new_eval_summary, {self.new_eval_summary_in: new_acc})
-                        self.summary_writer.add_summary(sess, new_eval_success, itr)
+                        self.summary_writer.add_summary(
+                            sess, new_eval_success, itr)
 
                 if itr % EVAL_TRAINENV_INTERVAL == 0 and itr > 1 and self.eval_trainenv is not None:
                     acc = self.eval_trainenv.evaluate(itr)
-                    print('Evaluation on train set at iter %d. Success rate: %.2f (train)' % (itr, acc))
+                    print(
+                        'Evaluation on train set at iter %d. Success rate: %.2f (train)' % (itr, acc))
                     if self.summary_writer is not None:
                         eval_trainenv_success = sess.run(
                             self.eval_trainenv_summary, {self.eval_trainenv_summary_in: acc})
-                        self.summary_writer.add_summary(sess, eval_trainenv_success, itr)
+                        self.summary_writer.add_summary(
+                            sess, eval_trainenv_success, itr)
 
                 if itr % SAVE_INTERVAL == 0:
                     self.pipeline.save(itr)
@@ -122,49 +128,58 @@ class ILTrainer(object):
             # import pdb; pdb.set_trace()
             if itr % EVAL_INTERVAL == 0 and itr > 1 and self.eval is not None:
                 acc, new_acc = self.eval.evaluate(itr)
-                print('Evaluation on old test setat iter %d. Success rate: %.2f (test)' % (itr, acc))
-                print('Evaluation on new test set at iter %d. Success rate: %.2f (test)' % (itr, new_acc))
+                print(
+                    'Evaluation on old test setat iter %d. Success rate: %.2f (test)' % (itr, acc))
+                print('Evaluation on new test set at iter %d. Success rate: %.2f (test)' % (
+                    itr, new_acc))
                 if self.summary_writer is not None:
                     eval_success = sess.run(
                         self.eval_summary, {self.eval_summary_in: acc})
                     self.summary_writer.add_summary(sess, eval_success, itr)
-                
+
                     new_eval_success = sess.run(
                         self.new_eval_summary, {self.new_eval_summary_in: new_acc})
-                    self.summary_writer.add_summary(sess, new_eval_success, itr)
+                    self.summary_writer.add_summary(
+                        sess, new_eval_success, itr)
 
             if itr % EVAL_TRAINENV_INTERVAL == 0 and itr > 1 and self.eval_trainenv is not None:
                 acc = self.eval_trainenv.evaluate(itr)
-                print('Evaluation on train set at iter %d. Success rate: %.2f (train)' % (itr, acc))
+                print(
+                    'Evaluation on train set at iter %d. Success rate: %.2f (train)' % (itr, acc))
                 if self.summary_writer is not None:
                     eval_trainenv_success = sess.run(
                         self.eval_trainenv_summary, {self.eval_trainenv_summary_in: acc})
-                    self.summary_writer.add_summary(sess, eval_trainenv_success, itr)
+                    self.summary_writer.add_summary(
+                        sess, eval_trainenv_success, itr)
         else:
             for itr in range(25000, 400001, 25000):
                 print(f'Evaling with {itr} checkpoint.')
                 self.pipeline.load(itr)
-                # import pdb; pdb.set_trace()
                 if itr % EVAL_INTERVAL == 0 and itr > 1 and self.eval is not None:
-                    acc, new_acc = self.eval.evaluate(itr)
-                    print('Evaluation on old test setat iter %d. Success rate: %.2f (test)' % (itr, acc))
-                    print('Evaluation on new test set at iter %d. Success rate: %.2f (test)' % (itr, new_acc))
+                    # acc, new_acc = self.eval.evaluate(itr)
+                    acc = self.eval.evaluate(itr)
+                    print(
+                        'Evaluation on old test setat iter %d. Success rate: %.2f (test)' % (itr, acc))
+                    # print('Evaluation on new test set at iter %d. Success rate: %.2f (test)' % (itr, new_acc))
                     if self.summary_writer is not None:
                         eval_success = sess.run(
                             self.eval_summary, {self.eval_summary_in: acc})
-                        self.summary_writer.add_summary(sess, eval_success, itr)
-                    
-                        new_eval_success = sess.run(
-                            self.new_eval_summary, {self.new_eval_summary_in: new_acc})
-                        self.summary_writer.add_summary(sess, new_eval_success, itr)
+                        self.summary_writer.add_summary(
+                            sess, eval_success, itr)
+
+                        # new_eval_success = sess.run(
+                        #     self.new_eval_summary, {self.new_eval_summary_in: new_acc})
+                        # self.summary_writer.add_summary(sess, new_eval_success, itr)
 
                 if itr % EVAL_TRAINENV_INTERVAL == 0 and itr > 1 and self.eval_trainenv is not None:
                     acc = self.eval_trainenv.evaluate(itr)
-                    print('Evaluation on train set at iter %d. Success rate: %.2f (train)' % (itr, acc))
+                    print(
+                        'Evaluation on train set at iter %d. Success rate: %.2f (train)' % (itr, acc))
                     if self.summary_writer is not None:
                         eval_trainenv_success = sess.run(
                             self.eval_trainenv_summary, {self.eval_trainenv_summary_in: acc})
-                        self.summary_writer.add_summary(sess, eval_trainenv_success, itr)
+                        self.summary_writer.add_summary(
+                            sess, eval_trainenv_success, itr)
                 # finish if evaluation only
                 # if eval_only:
                 #     break

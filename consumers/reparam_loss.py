@@ -107,11 +107,11 @@ class ReparamLoss(Consumer):
             kl_language = tf.reduce_sum(kl_divergence(q, p_language), axis=1)
             kl_language = tf.reduce_mean(kl_language)
 
-            if self.reparam_embedding_type == 'include_kl':
+            if self.reparam_embedding_type == 'kl':
                 self.loss_embedding = self.loss_lambda * (kl_image + kl_language + kl)
-            elif self.reparam_embedding_type == 'include_kl_2':
+            elif self.reparam_embedding_type == 'kl_2image':
                 self.loss_embedding = self.loss_lambda * (2 * kl_image + kl_language + kl)
-            elif self.reparam_embedding_type == 'kl_2':
+            elif self.reparam_embedding_type == '2image':
                 self.loss_embedding = self.loss_lambda * (2 * kl_image + kl_language)
             else:
                 self.loss_embedding = self.loss_lambda * (kl_image + kl_language)

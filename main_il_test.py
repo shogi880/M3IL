@@ -106,7 +106,7 @@ flags.DEFINE_bool(
 flags.DEFINE_bool(
     'eval_only', False, 'Evaluate only and not resume training.')
 flags.DEFINE_list(
-    'eval_num_tasks', [74, 20], 'Number of tasks for evaluation in test and training env (default: [74, 20]).')
+    'eval_num_tasks', [2, 2], 'Number of tasks for evaluation in test and training env (default: [74, 20]).')
 flags.DEFINE_integer(
     'eval_num_trials', 6, 'Number of trials for evaluation (default: 6).')
 flags.DEFINE_integer(
