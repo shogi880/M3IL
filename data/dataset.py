@@ -27,7 +27,7 @@ class Dataset(object):
 
     def test_set(self):
         return self.load("test")
-    
+
     def new_test_set(self):
         return self.load("new_test")
 
@@ -56,7 +56,8 @@ class Dataset(object):
                 if 'demo_selection' in data:
                     # example['demo_selection'] = data['demo_selection'].replace('/root/code/rllab/vendor/mujoco_models', '/root/workspace/gym/gym/envs/mujoco/assets/sim_push_xmls')
                     example['demo_selection'] = data['demo_selection']
-                    npy_name = data["demo_selection"].split('/')[-1].split('.')[0]
+                    npy_name = data["demo_selection"].split(
+                        '/')[-1].split('.')[0]
                     if self.sentence == '15types':
                         language_npy = f'/root/share/768_15_types_instruction/{npy_name}.npy'
                     elif self.sentence == '30types':
