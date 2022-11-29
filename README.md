@@ -1,4 +1,4 @@
-# M3IL：Multi-Modal Meta Imitation Learning (under review)
+# M3IL：Multi-Modal Meta Imitation Learning
 
 
 ### Code Design
